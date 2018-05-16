@@ -6,7 +6,7 @@ environment:
   AWS_ACCESS_KEY_ID:
     secure: orM9wQ470RLmboumGqJwZt5Vpk6j+nKLKqWVP1bpZAo=
   AWS_SECRET_ACCESS_KEY:
-    secure: Z+k1EcNjtzaqZcycuVjtrYo+YQXngBqe2Rvmo+7u9evQz3lI1KUXuK406PZBPKR
+    secure: 6Z+k1EcNjtzaqZcycuVjtrYo+YQXngBqe2Rvmo+7u9evQz3lI1KUXuK406PZBPKR
   bucket: relops-image-builder
 
 # Maximum number of concurrent jobs for the project
