@@ -3,9 +3,11 @@ version: 1.0.{build}
 image: Visual Studio 2015
 
 environment:
-  access_key_id: temp
-  secret_access_key: temp
-  bucket: temp
+  AWS_ACCESS_KEY_ID:
+    secure: orM9wQ470RLmboumGqJwZt5Vpk6j+nKLKqWVP1bpZAo=
+  AWS_SECRET_ACCESS_KEY:
+    secure: Z+k1EcNjtzaqZcycuVjtrYo+YQXngBqe2Rvmo+7u9evQz3lI1KUXuK406PZBPKR
+  bucket: relops-image-builder
 
 # Maximum number of concurrent jobs for the project
 max_jobs: 1
@@ -16,6 +18,7 @@ install:
   - ps: Write-Host "Downloading ISO..."
 #  - ps: Invoke-WebRequest -Uri "https://s3-us-west-2.amazonaws.com/relops-image-builder/ISOs/en_windows_10_enterprise_version_1703_updated_july_2017_x64_dvd_10925376.iso" -OutFile "C:\windows-install.iso"
   - cmd: aws --version
+  - cmd: aws s3 ls relops-image-builder
 
 build_script:
   - ps: Write-Host "Testing"
