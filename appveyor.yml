@@ -22,7 +22,7 @@ install:
 
 build_script:
   - ps: (new-object System.Security.Principal.WindowsPrincipal([System.Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
-  - ps: Write-Host "Converting ISO to VHD..."
+  - ps: Write-Host "Converting ISO to VHDX..."
   - ps: . .\Convert-WindowsImage.ps1; Convert-WindowsImage -RemoteDesktopEnable -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhdx
   - ps: Write-Host $env:iso
   - cmd: dir
@@ -34,7 +34,7 @@ build_script:
 
 artifacts:
   # pushing a single file
-  - path: .\win1064_build.vhd
+  - path: .\win1064_build.vhdx
 
 
 deploy:
