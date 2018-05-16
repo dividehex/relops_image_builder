@@ -17,17 +17,17 @@ platform: x64
 
 install:
   - ps: Write-Host "Downloading ISO..."
-#  - ps: Invoke-WebRequest -Uri "https://s3-us-west-2.amazonaws.com/relops-image-builder/ISOs/en_windows_10_enterprise_version_1703_updated_july_2017_x64_dvd_10925376.iso" -OutFile "C:\windows-install.iso"
   - cmd: aws --version
   - cmd: aws s3 cp s3://%bucket%/ISOs/%iso% .
 
 build_script:
   - ps: Write-Host "Converting ISO to VHD..."
   - ps: .\Convert-WindowsImage.ps1 -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhd
+  - cmd: dir
 
 artifacts:
   # pushing a single file
-  - path: win1064_build.vhd
+  - path: .\win1064_build.vhd
 
 
 deploy:
