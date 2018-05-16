@@ -22,6 +22,7 @@ install:
   - cmd: aws s3 cp s3://%bucket%/ISOs/%iso% .
 
 build_script:
-  - ps: Write-Host "Testing"
+  - ps: Write-Host "Converting ISO to VHD..."
+  - ps: .\Convert-WindowsImage.ps1 -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhd
     
 
