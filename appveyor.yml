@@ -1,0 +1,22 @@
+version: 1.0.{build}
+
+image: Visual Studio 2015
+
+environment:
+  access_key_id: temp
+  secret_access_key: temp
+  bucket: temp
+
+# Maximum number of concurrent jobs for the project
+max_jobs: 1
+
+platform: x64
+
+install:
+  - ps: Invoke-WebRequest -Uri "https://s3-us-west-2.amazonaws.com/relops-image-builder/ISOs/en_windows_10_enterprise_version_1703_updated_july_2017_x64_dvd_10925376.iso" -OutFile "C:\windows-install.iso"
+#  - ps: Install-Module -Name AWSPowerShell
+
+build_script:
+  - ps: Write-Host "Testing"
+    
+
