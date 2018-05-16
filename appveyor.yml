@@ -8,6 +8,7 @@ environment:
   AWS_SECRET_ACCESS_KEY:
     secure: 6Z+k1EcNjtzaqZcycuVjtrYo+YQXngBqe2Rvmo+7u9evQz3lI1KUXuK406PZBPKR
   bucket: relops-image-builder
+  iso: en_windows_10_enterprise_version_1703_updated_july_2017_x64_dvd_10925376.iso
 
 # Maximum number of concurrent jobs for the project
 max_jobs: 1
@@ -18,7 +19,7 @@ install:
   - ps: Write-Host "Downloading ISO..."
 #  - ps: Invoke-WebRequest -Uri "https://s3-us-west-2.amazonaws.com/relops-image-builder/ISOs/en_windows_10_enterprise_version_1703_updated_july_2017_x64_dvd_10925376.iso" -OutFile "C:\windows-install.iso"
   - cmd: aws --version
-  - cmd: aws s3 ls relops-image-builder
+  - cmd: aws s3 cp s3://%bucket%/ISOs/%iso% C:/
 
 build_script:
   - ps: Write-Host "Testing"
