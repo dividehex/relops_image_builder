@@ -22,10 +22,14 @@ install:
 
 build_script:
   - ps: Write-Host "Converting ISO to VHD..."
-  - ps: .\Convert-WindowsImage.ps1 -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhd *^&1
+  - ps: .\Convert-WindowsImage.ps1 -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhd *^1
   - ps: Write-Host $env:iso
   - cmd: dir
 
+
+
+cache:
+  - en_windows_10_enterprise_version_1703_updated_july_2017_x64_dvd_10925376.iso
 artifacts:
   # pushing a single file
   - path: .\win1064_build.vhd
