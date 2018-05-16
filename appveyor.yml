@@ -23,7 +23,7 @@ install:
 build_script:
   - ps: (new-object System.Security.Principal.WindowsPrincipal([System.Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
   - ps: Write-Host "Converting ISO to VHD..."
-  - ps: .\Convert-WindowsImage.ps1 -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhd *^1
+  - ps: . .\Convert-WindowsImage.ps1; Convert-WindowsImage -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhd
   - ps: Write-Host $env:iso
   - cmd: dir
 
@@ -48,6 +48,6 @@ deploy:
   folder: VHDs
 
 
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+#on_finish:
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
