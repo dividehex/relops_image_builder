@@ -22,7 +22,7 @@ install:
 
 build_script:
   - ps: Write-Host "Converting ISO to VHD..."
-  - ps: .\Convert-WindowsImage.ps1 -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhd
+  - ps: .\Convert-WindowsImage.ps1 -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhd *^&1
   - ps: Write-Host $env:iso
   - cmd: dir
 
