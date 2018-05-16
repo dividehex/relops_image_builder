@@ -21,6 +21,7 @@ install:
   - cmd: aws s3 cp s3://%bucket%/ISOs/%iso% .
 
 build_script:
+  - ps: (new-object System.Security.Principal.WindowsPrincipal([System.Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
   - ps: Write-Host "Converting ISO to VHD..."
   - ps: .\Convert-WindowsImage.ps1 -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhd *^1
   - ps: Write-Host $env:iso
@@ -28,8 +29,9 @@ build_script:
 
 
 
-cache:
-  - en_windows_10_enterprise_version_1703_updated_july_2017_x64_dvd_10925376.iso
+#cache:
+#  - en_windows_10_enterprise_version_1703_updated_july_2017_x64_dvd_10925376.iso
+
 artifacts:
   # pushing a single file
   - path: .\win1064_build.vhd
