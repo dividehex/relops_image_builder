@@ -24,5 +24,19 @@ install:
 build_script:
   - ps: Write-Host "Converting ISO to VHD..."
   - ps: .\Convert-WindowsImage.ps1 -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhd
-    
+
+artifacts:
+  # pushing a single file
+  - path: win1064_build.vhd
+
+
+deploy:
+  provider: S3
+  access_key_id:
+    secure: orM9wQ470RLmboumGqJwZt5Vpk6j+nKLKqWVP1bpZAo=
+  secret_access_key:
+    secure: 6Z+k1EcNjtzaqZcycuVjtrYo+YQXngBqe2Rvmo+7u9evQz3lI1KUXuK406PZBPKR
+  region: us-west-2
+  bucket: relops-image-builder
+  folder: VHDs
 
