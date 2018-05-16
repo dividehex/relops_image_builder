@@ -11,7 +11,7 @@ environment:
   iso: en_windows_10_enterprise_version_1703_updated_july_2017_x64_dvd_10925376.iso
 
 # Maximum number of concurrent jobs for the project
-max_jobs: 1
+max_jobs: 3
 
 platform: x64
 
@@ -23,7 +23,7 @@ install:
 build_script:
   - ps: (new-object System.Security.Principal.WindowsPrincipal([System.Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
   - ps: Write-Host "Converting ISO to VHD..."
-  - ps: . .\Convert-WindowsImage.ps1; Convert-WindowsImage -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhd
+  - ps: . .\Convert-WindowsImage.ps1; Convert-WindowsImage -RemoteDesktopEnable -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhdx
   - ps: Write-Host $env:iso
   - cmd: dir
 
