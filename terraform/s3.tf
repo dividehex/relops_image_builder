@@ -1,7 +1,7 @@
 
 resource "aws_s3_bucket" "relops_image_builder" {
     bucket = "relops-image-builder"
-    acl = "private"
+    acl = "public-read"
 }
 
 data "aws_iam_policy_document" "ec2_assume_role" {
