@@ -1,9 +1,9 @@
 version: 1.0.{build}
 
 build_cloud: relops-aws-build-cloud
-#image: 
+image: Windows Server 2016 on EC2 
 
-image: Visual Studio 2015
+#image: Visual Studio 2015
 
 environment:
   AWS_ACCESS_KEY_ID:
