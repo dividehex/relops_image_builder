@@ -1,5 +1,8 @@
 version: 1.0.{build}
 
+build_cloud: relops-aws-build-cloud
+#image: 
+
 image: Visual Studio 2015
 
 environment:
@@ -11,20 +14,20 @@ environment:
   iso: en_windows_10_enterprise_version_1703_updated_july_2017_x64_dvd_10925376.iso
 
 # Maximum number of concurrent jobs for the project
-max_jobs: 3
+max_jobs: 1
 
 platform: x64
 
 install:
   - ps: Write-Host "Downloading ISO..."
-  - cmd: aws --version
-  - cmd: aws s3 cp s3://%bucket%/ISOs/%iso% .
+#  - cmd: aws --version
+#  - cmd: aws s3 cp s3://%bucket%/ISOs/%iso% .
 
 build_script:
-  - ps: (new-object System.Security.Principal.WindowsPrincipal([System.Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
-  - ps: Write-Host "Converting ISO to VHDX..."
-  - ps: . .\Convert-WindowsImage.ps1; Convert-WindowsImage -RemoteDesktopEnable -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhdx
-  - ps: Write-Host $env:iso
+    #  - ps: (new-object System.Security.Principal.WindowsPrincipal([System.Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
+    #  - ps: Write-Host "Converting ISO to VHDX..."
+    #  - ps: . .\Convert-WindowsImage.ps1; Convert-WindowsImage -RemoteDesktopEnable -SourcePath .\$env:iso -Edition Enterprise -VHDPath .\win1064_build.vhdx
+    #  - ps: Write-Host $env:iso
   - cmd: dir
 
 
@@ -32,20 +35,20 @@ build_script:
 #cache:
 #  - en_windows_10_enterprise_version_1703_updated_july_2017_x64_dvd_10925376.iso
 
-artifacts:
+#artifacts:
   # pushing a single file
-  - path: .\win1064_build.vhdx
+  #  - path: .\win1064_build.vhdx
 
 
-deploy:
-  provider: S3
-  access_key_id:
-    secure: orM9wQ470RLmboumGqJwZt5Vpk6j+nKLKqWVP1bpZAo=
-  secret_access_key:
-    secure: 6Z+k1EcNjtzaqZcycuVjtrYo+YQXngBqe2Rvmo+7u9evQz3lI1KUXuK406PZBPKR
-  region: us-west-2
-  bucket: relops-image-builder
-  folder: VHDs
+#deploy:
+#  provider: S3
+#  access_key_id:
+#    secure: orM9wQ470RLmboumGqJwZt5Vpk6j+nKLKqWVP1bpZAo=
+#  secret_access_key:
+#    secure: 6Z+k1EcNjtzaqZcycuVjtrYo+YQXngBqe2Rvmo+7u9evQz3lI1KUXuK406PZBPKR
+#  region: us-west-2
+#  bucket: relops-image-builder
+#  folder: VHDs
 
 
 #on_finish:
